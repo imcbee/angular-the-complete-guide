@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { ServersService } from '../servers.service';
 
 @Component({
@@ -16,14 +16,21 @@ export class ServerComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.params['id']; // + will convert a string to number
-    this.server = this.serversService.getServer(id);
-    this.route.params
+    this.route.data
       .subscribe(
-        (params) => {
-          this.server = this.serversService.getServer(+params['id']);
+        (data: Data) => {
+          this.server = data['server'];
         }
       );
+        //! Now we can use data above
+    // const id = +this.route.snapshot.params['id']; // + will convert a string to number
+    // this.server = this.serversService.getServer(id);
+    // this.route.params
+    //   .subscribe(
+    //     (params) => {
+    //       this.server = this.serversService.getServer(+params['id']);
+    //     }
+    //   );
   }
 
   onEdit() {
