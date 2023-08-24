@@ -1,12 +1,12 @@
-import { Ingredients } from "../shared/ingredient.model";
+import { Ingredient } from "../shared/ingredient.model";
 
 export class Recipe {
   public name: String;
   public description: String;
   public imagePath: String;
-  public ingredients: Ingredients[];
+  public ingredients: Ingredient[];
 
-  constructor(name: String, desc: String, imagePath: String, ingredients: Ingredients[]) {
+  constructor(name: String, desc: String, imagePath: String, ingredients: Ingredient[]) {
     this.name = name;
     this.description = desc;
     this.imagePath = imagePath;
