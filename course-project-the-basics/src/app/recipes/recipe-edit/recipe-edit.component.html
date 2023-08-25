@@ -7,7 +7,10 @@
                         type="submit" 
                         class="btn btn-success"
                         [disabled]="!recipeForm.valid">Save</button>
-                    <button type="button" class="btn btn-danger">Cancel</button>
+                    <button 
+                        type="button" 
+                        class="btn btn-danger"
+                        (click)="onCancel()">Cancel</button>
                 </div>
             </div>
             <div class="row">
@@ -30,14 +33,15 @@
                             type="test"
                             id="imagePath"
                             class="form-control"
-                            formControlName="imagePath">
+                            formControlName="imagePath"
+                            #imagePath>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <img 
-                        src="" 
+                        [src]="imagePath.value" 
                         alt=""
                         class="img-responsive">
                 </div>
@@ -76,7 +80,10 @@
                                 formControlName="amount">
                         </div>
                         <div class="col-xs-2">
-                            <button class="btn btn-danger">X</button>
+                            <button 
+                                type="button"
+                                (click)="onDeleteIngredient(i)"
+                                class="btn btn-danger">X</button>
                         </div>
                     </div>
                     <hr>
@@ -86,6 +93,10 @@
                                 type="button"
                                 class="btn btn-success"
                                 (click)="onAddIngredient()">Add Ingredient</button>
+                            <button 
+                                type="button"
+                                class="btn btn-danger"
+                                (click)="onDeleteAllIngredients()">Delete All Ingredients</button>
                         </div>
                     </div>
                 </div>
