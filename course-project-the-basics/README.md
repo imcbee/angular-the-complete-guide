@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 # angular-the-complete-guide
 ## This repo is collect all of the work from the Udemy course: "Angular the Complete Guide"
 [https://www.udemy.com/course/the-complete-guide-to-angular-2/](https://www.udemy.com/course/the-complete-guide-to-angular-2/)
-=======
+
 # CourseProjectTheBasics
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.12.
@@ -30,4 +29,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
->>>>>>> 8e1c0cd (unsubmodule)
+
