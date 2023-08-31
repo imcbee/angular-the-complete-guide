@@ -24,8 +24,10 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 
+
+//! if this is too big, you can split it up for performance
 @NgModule({
-  declarations: [
+  declarations: [ //* declare your components here
     AppComponent,
     HeaderComponent,
     RecipesComponent,
@@ -43,22 +45,22 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     AlertComponent,
     PlaceholderDirective
   ],
-  imports: [
+  imports: [ //* importing other modules built in angular
     BrowserModule, 
     AppRoutingModule, 
     FormsModule, 
     ReactiveFormsModule, 
     HttpClientModule
   ],
-  providers: [
+  providers: [ //* import the services in angular or you can add 'providedIn: 'root''
     ShoppingListService, 
     RecipeService, 
-    {
+    { //* this is the authinterceptorservice used andhow to provided it
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptorService, 
       multi: true
     }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent], //* this starts your app
 })
 export class AppModule {}
