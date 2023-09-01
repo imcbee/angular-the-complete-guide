@@ -9,20 +9,12 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthComponent } from './auth/auth.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeService } from './recipes/recipe.service';
-import { RecipesComponent } from './recipes/recipes.component';
-import { AlertComponent } from './shared/alert/alert.component';
-import { DropdownDirective } from './shared/dropdown.directive';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { RecipesRoutingModule } from './recipes/recipes-routing.module';
+import { RecipesModule } from './recipes/recipes.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { SharedModule } from './shared/shared.module';
 
 
 //! if this is too big, you can split it up for performance
@@ -30,27 +22,18 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
   declarations: [ //* declare your components here
     AppComponent,
     HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    DropdownDirective,
-    RecipeStartComponent,
-    RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent,
     ErrorPageComponent,
-    AlertComponent,
-    PlaceholderDirective
   ],
   imports: [ //* importing other modules built in angular
     BrowserModule, 
-    AppRoutingModule, 
     FormsModule, 
     ReactiveFormsModule, 
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule, 
+    RecipesModule,
+    ShoppingListModule,
+    SharedModule
   ],
   providers: [ //* import the services in angular or you can add 'providedIn: 'root''
     ShoppingListService, 
