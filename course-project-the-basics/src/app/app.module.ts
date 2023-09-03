@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core.module';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
+import { LoggingService } from './logging.service';
 
 
 //! if this is too big, you can split it up for performance
@@ -24,5 +25,6 @@ import { SharedModule } from './shared/shared.module';
     CoreModule
   ],
   bootstrap: [AppComponent], //* this starts your app
+  //providers: [LoggingService] //! Always use provideIn root for services usually
 })
 export class AppModule {}
