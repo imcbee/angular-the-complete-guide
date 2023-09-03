@@ -8,7 +8,7 @@ import { RecipeService } from "../recipes/recipe.service";
 
 @Injectable({providedIn: 'root'})
 export class DataStorageService {
-          
+
   constructor(
     private http: HttpClient,
     private recipeService: RecipeService,
