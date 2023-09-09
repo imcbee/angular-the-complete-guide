@@ -1,4 +1,5 @@
-import { Component, trigger, state, style, transition, animate, keyframes, group } from '@angular/core';
+import { animate, group, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ import { Component, trigger, state, style, transition, animate, keyframes, group
       })),
       state('highlighted', style({
         'background-color': 'blue',
-        transform: 'translateX(100px)'
+        transform: 'translateX(100px) scale(1)'
       })),
       state('shrunken', style({
         'background-color': 'green',
@@ -46,14 +47,14 @@ import { Component, trigger, state, style, transition, animate, keyframes, group
         opacity: 1,
         transform: 'translateX(0)'
       })),
-      transition('void <=> *', [
+      transition('void => *', [
         style({
           opacity: 0,
           transform: 'translateX(-100px)'
         }),
         animate(300)
       ]), //? void is transition state of the DOM
-      transition('* <=> void', [
+      transition('* => void', [
         animate(300, style({
           transform: 'translateX(100px)',
           opacity: 0
@@ -65,7 +66,7 @@ import { Component, trigger, state, style, transition, animate, keyframes, group
         opacity: 1,
         transform: 'translateX(0)'
       })),
-      transition('void <=> *', [
+      transition('void => *', [
         animate(1000, keyframes([
           style({
             transform: 'translateX(-100px)',
