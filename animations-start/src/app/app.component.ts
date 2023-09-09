@@ -30,9 +30,9 @@ import { Component} from '@angular/core';
         'background-color': 'green',
         transform: 'translateX(0) scale(0.5)'
       })),
-      transition('normal <=> highlighted', animate(300)),
-      transition('normal <=> highlighted', animate(800)),
-      transition('shrunk <=> *', [ //? use an array to show transitions of multiple styles
+      transition('normal => highlighted', animate(300)),
+      transition('highlighted => normal', animate(800)),
+      transition('shrunken <=> *', [ //? use an array to show transitions of multiple styles
         style({
           'background-color': 'orange'
         }),
@@ -91,7 +91,7 @@ import { Component} from '@angular/core';
         ]
         ))
       ]), 
-      transition('* <=> void', [
+      transition('* => void', [
         group([  //? groups the animations together
           animate(300, style({
             color: 'red',
