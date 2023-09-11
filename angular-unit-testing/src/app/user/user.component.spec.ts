@@ -1,7 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { UserComponent } from './user.component';
 import { UserService } from './user.service';
+import { DataService } from '../shared/data.service';
 
 describe('UserComponent', () => {
   beforeEach(() => {
@@ -44,6 +45,42 @@ describe('UserComponent', () => {
     let compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('p').textContent).not.toContain(app.user.name);
   });
+
+  it('should\'t fetch data successfully if not called asynchronously', () => {
+    let fixture = TestBed.createComponent(UserComponent);
+    let app = fixture.debugElement.componentInstance;
+    let dataService = fixture.debugElement.injector.get(DataService);
+    let spy = spyOn(dataService, 'getDetails')
+      .and.returnValue(Promise.resolve('Data'));
+    fixture.detectChanges();
+
+    expect(app.data).toBe(undefined);
+  });
+
+  it('should\'t fetch data successfully if called asynchronously', () => {
+    let fixture = TestBed.createComponent(UserComponent);
+    let app = fixture.debugElement.componentInstance;
+    let dataService = fixture.debugElement.injector.get(DataService);
+    let spy = spyOn(dataService, 'getDetails')
+      .and.returnValue(Promise.resolve('Data'));
+    fixture.detectChanges();
+    
+    fixture.whenStable().then(() => {
+      expect(app.data).toBe('Data');
+    });
+  });
+  
+  it('should\'t fetch data successfully if called asynchronously', fakeAsync(() => {
+    let fixture = TestBed.createComponent(UserComponent);
+    let app = fixture.debugElement.componentInstance;
+    let dataService = fixture.debugElement.injector.get(DataService);
+    let spy = spyOn(dataService, 'getDetails')
+      .and.returnValue(Promise.resolve('Data'));
+    fixture.detectChanges();
+    tick();
+  
+    expect(app.data).toBe('Data'); //! this is the same as above, different philosphy
+  }));
 
 
 });
