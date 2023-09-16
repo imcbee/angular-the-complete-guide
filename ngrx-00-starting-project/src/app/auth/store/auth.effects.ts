@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -33,7 +33,8 @@ const handleAuthentication = (
     email: email, 
     userId: userId, 
     token: token, 
-    expirationDate:expirationDate
+    expirationDate:expirationDate,
+    redirect: true
   });
 };
 
@@ -59,7 +60,7 @@ const handleError = (errorRes: any) => {
 @Injectable()
 export class AuthEffects {
 
-  authSignUp = createEffect(this.actions$.pipe(
+  authSignUp = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.SIGNUP_START),
     switchMap((signupAction: AuthActions.SignUpStart) => {
       return this.http
@@ -106,8 +107,6 @@ export class AuthEffects {
             this.authService.setLogOutTimer(+resData.expiresIn * 1000);
           }),
           map(resData => {
-            const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
-            this.authService.setLogOutTimer(expirationDuration)
             return handleAuthentication(
               +resData.expiresIn, 
               resData.email, 
@@ -124,8 +123,10 @@ export class AuthEffects {
 
   authRedirect = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS), 
-    tap(() => {
-      this.router.navigate(['/']);
+    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+      if (authSuccessAction.payload.redirect) {
+        this.router.navigate(['/']);
+      }
     })
   ));
 
@@ -164,7 +165,8 @@ export class AuthEffects {
           email: loadedUser.email, 
           userId: loadedUser.id, 
           token: loadedUser.token,
-          expirationDate: new Date(userData._tokenExpirationDate)
+          expirationDate: new Date(userData._tokenExpirationDate),
+          redirect: false
         });
         // const expirationDuration =
         //   new Date(userData._tokenExpirationDate).getTime() -
