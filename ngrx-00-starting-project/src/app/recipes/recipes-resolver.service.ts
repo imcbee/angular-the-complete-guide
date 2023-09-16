@@ -20,7 +20,7 @@ export class RecipesResolverService {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const recipes = this.recipesService.getRecipes();
+    //const recipes = this.recipesService.getRecipes();
 
     //if (recipes.length === 0) {
       //return this.dataStorageService.fetchRecipes();
